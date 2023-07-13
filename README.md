@@ -2,6 +2,8 @@
 
 ## 简介
 
+该工程基础模板由 RT-Thread 下相关 BSP 裁剪得来。旨在针对 robomaster 大赛，构建一套专门的 BSP，同时兼容 RT-Thread 丰富的开发工具和优秀的编程思维。
+
 本文档为 STM32F407 Robomaster 开发板C型 的 BSP (板级支持包) 说明。
 
 主要内容如下：
@@ -37,21 +39,28 @@ Robomaster 开发板C型 是大疆创新科技有限公司推出的一款基于 
 
 开发板更多详细信息请参考 RoboMaster官网：[RoboMaster开发板 C 型](https://www.robomaster.com/zh-CN/products/components/general/development-board-type-c/info) 
 
-## 外设支持
+## 组件支持
 
-本 BSP 目前对外设的支持情况如下：
+本 BSP 目前支持情况如下：
 
 | **板载外设** | **支持情况** | **备注**                             |
 | :----------- | :----------: | :----------------------------------- |
 | BMI088       |   暂不支持   | 六轴惯性测量单元（有软件包）            |
 | IST8310      |   暂不支持   | 三轴磁力计                           |
-| **片上外设** | **支持情况** | **备注**                             |
-| GPIO         |     支持     | PA0, PA1... PH1 ---> PIN: 0, 1...144 |
-| UART         |     支持     | UART1(FinSH),  UART3(DBUS),  UART6          |
-| CAN          |     支持    | CAN1, CAN2                           |
-| PWM          |   支持   | TIM1(CH1/2/3/4), TIM4(CH3), TIM5(CH1/2/3), TIM8(CH1/2/3) |
-| SPI          |   支持   | SPI2 |
-| IIC          |   支持   | 模拟IIC(SDA-->PF0, SCL-->PF1) |
+| **片上外设** | **支持情况**                  |
+| UART     |     暂不支持     | UART1(FinSH),  UART3(DBUS),  UART6 |
+| PWM      |     暂不支持     |           |
+| SPI          | 暂不支持    | SPI2                       |
+| IIC       |   暂不支持   |  |
+| CAN          |   暂不支持   | CAN1, CAN2 |
+| USB    |   暂不支持   |  |
+| DWT | 暂不支持 |  |
+| **工具组件** | **支持情况** |  |
+| Finsh | 暂不支持 |  |
+| Easyflash | 暂不支持 |  |
+| **控制算法** | **支持情况** |  |
+| PID | 暂不支持 |                                    |
+| 卡尔曼滤波 | 暂不支持 |  |
 
 ## 使用说明
 
@@ -68,7 +77,7 @@ Robomaster 开发板C型 是大疆创新科技有限公司推出的一款基于 
 
 ### 快速上手
 
-本 BSP 为开发者提供 MDK5 和 IAR 工程，并且支持 GCC 开发环境。下面以 MDK5 开发环境为例，介绍如何将系统运行起来。
+本 BSP 为开发者提供 MDK5 工程，并且支持 GCC 开发环境。下面以 MDK5 开发环境为例，介绍如何将系统运行起来。
 
 #### 硬件连接
 
@@ -89,23 +98,23 @@ Robomaster 开发板C型 是大疆创新科技有限公司推出的一款基于 
 ```bash
  \ | /
 - RT -     Thread Operating System
- / | \     4.1.1 build Jul 29 2022 23:31:38
+ / | \     5.0.1 build Jul 13 2023 22:04:55
  2006 - 2022 Copyright by RT-Thread team
-msh >
+msh >p
 ```
 > 终端工具推荐使用 [MobaXterm](https://mobaxterm.mobatek.net/) 或 [Xshell](https://www.netsarang.com/en/free-for-home-school/)，均有免费的个人版本
 
 ### 进阶使用
 
-此 BSP 默认只开启了 GPIO 和 UART1(丝印为 UART2 4pin 接口) 的功能，更多高级功能需要利用 ENV 工具对 BSP 进行配置，步骤如下：
+更多高级功能需要利用 ENV 工具对 BSP 进行配置，例如生成可以使用 **Clion** 进行开发的工程，步骤如下：
 
 1. 在 BSP 下打开 env 工具。
 
 2. 输入 `menuconfig` 命令配置工程，配置好之后保存退出。
 
-3. 输入 `pkgs --update` 命令更新软件包。
+3. 输入 `scons --target=cmake` 命令重新生成工程。
 
-4. 输入 `scons --target=mdk4/mdk5/iar` 命令重新生成工程。
+4. 使用 Clion 打开工程即可。
 
 本章节更多详细的介绍请参考 [STM32 系列 BSP 外设驱动使用教程](../docs/STM32 系列 BSP 外设驱动使用教程. md)。
 
@@ -120,4 +129,4 @@ msh >
 
 - [crazt](https://github.com/CraztTnspt) ，邮箱：<crazt@foxmail.com>
 - [Meng](https://github.com/Meng2025) ，邮箱：<m@njust.edu.cn>
-
+- [Z8MAN8 ](https://github.com/Z8MAN8)，邮箱：<1468559561@qq.com>
