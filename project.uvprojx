@@ -138,7 +138,7 @@
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3>"" ()</Flash3>
+          <Flash3></Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>RT_USING_LIBC, RT_USING_ARMLIBC, USE_HAL_DRIVER, STM32F407xx, __CLK_TCK=RT_TICK_PER_SECOND, __STDC_LIMIT_MACROS, __RTTHREAD__</Define>
               <Undefine></Undefine>
-              <IncludePath>rt-thread\components\libc\compilers\common\extension;libraries\HAL_Drivers;libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Inc;libraries\STM32F4xx_HAL\CMSIS\Device\ST\STM32F4xx\Include;board;libraries\HAL_Drivers\config;rt-thread\libcpu\arm\common;rt-thread\components\libc\compilers\common\extension\fcntl\octal;.;rt-thread\components\libc\compilers\common\include;rt-thread\components\libc\posix\ipc;libraries\HAL_Drivers\CMSIS\Include;rt-thread\components\libc\posix\io\stdio;rt-thread\components\libc\posix\io\poll;rt-thread\include;rt-thread\components\finsh;board\CubeMX_Config\Inc;rt-thread\libcpu\arm\cortex-m4;applications</IncludePath>
+              <IncludePath>libraries\HAL_Drivers\config;.;libraries\HAL_Drivers;rt-thread\components\finsh;rt-thread\libcpu\arm\common;libraries\STM32F4xx_HAL\CMSIS\Device\ST\STM32F4xx\Include;board;board\CubeMX_Config\Inc;rt-thread\libcpu\arm\cortex-m4;rt-thread\components\libc\posix\io\stdio;rt-thread\include;rt-thread\components\libc\compilers\common\extension\fcntl\octal;libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Inc;applications;rt-thread\components\libc\compilers\common\include;rt-thread\components\libc\posix\io\poll;rt-thread\components\libc\compilers\common\extension;libraries\HAL_Drivers\CMSIS\Include;rt-thread\components\libc\posix\ipc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

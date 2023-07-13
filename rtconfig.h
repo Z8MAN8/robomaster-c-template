@@ -220,9 +220,7 @@
 
 /* Onboard Peripheral Drivers */
 
-
 /* On-chip Peripheral Drivers */
-
 
 /* Board extended module Drivers */
 
