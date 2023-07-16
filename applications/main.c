@@ -35,6 +35,9 @@
 /* USER CODE BEGIN Includes */
 #include <rtthread.h>
 #include <board.h>
+#ifdef BSP_USING_EASYFLASH
+#include <easyflash.h>
+#endif
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -136,7 +139,9 @@ int main(void)
   MX_I2C2_Init();
   MX_TIM5_Init();
   /* USER CODE BEGIN 2 */
-
+#ifdef BSP_USING_EASYFLASH
+  easyflash_init();
+#endif
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -690,7 +695,6 @@ static void MX_USART1_UART_Init(void)
   /* USER CODE END USART1_Init 2 */
 
 }
-INIT_BOARD_EXPORT(MX_USART1_UART_Init);
 
 
 /**
@@ -779,10 +783,52 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOE_CLK_ENABLE();
 
 }
-INIT_BOARD_EXPORT(MX_GPIO_Init);
 
 /* USER CODE BEGIN 4 */
+#ifdef BSP_USING_PIN
+INIT_BOARD_EXPORT(MX_GPIO_Init);
+#endif
+#ifdef BSP_USING_UART
+INIT_BOARD_EXPORT(MX_USART1_UART_Init);
+INIT_BOARD_EXPORT(MX_USART3_UART_Init);
+INIT_BOARD_EXPORT(MX_USART6_UART_Init);
+#endif
 
+
+#define DEBUG_USART huart1
+
+void rt_hw_console_output(const char *str)
+{
+    while (*str!='\0')
+    {
+        if (*str=='\n')
+        {
+			DEBUG_USART.Instance->DR = '\r';
+			while (__HAL_UART_GET_FLAG(&(DEBUG_USART), UART_FLAG_TXE) == RESET);
+        }
+		DEBUG_USART.Instance->DR = *(str++);
+	 	while (__HAL_UART_GET_FLAG(&(DEBUG_USART), UART_FLAG_TXE) == RESET);
+    }
+}
+
+char rt_hw_console_getchar(void)
+{
+    int8_t ch = -1;
+
+    if (__HAL_UART_GET_FLAG(&(DEBUG_USART),UART_FLAG_RXNE)!=RESET)
+    {
+        HAL_UART_Receive(&(DEBUG_USART), &ch, 1, 1);
+        __HAL_UART_CLEAR_FLAG(&(DEBUG_USART), UART_FLAG_RXNE);
+    }
+    else
+    {
+        if(__HAL_UART_GET_FLAG(&(DEBUG_USART),UART_FLAG_ORE)!=RESET)
+        {
+            __HAL_UART_CLEAR_FLAG(&(DEBUG_USART), UART_FLAG_ORE);
+        }
+    }
+    return ch;
+}
 /* USER CODE END 4 */
 
 /**
@@ -806,39 +852,3 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
-
-#define DEBUG_USART huart1
-
-void rt_hw_console_output(const char *str)
-{
-    while (*str!='\0')
-    {
-        if (*str=='\n')
-        {
-			DEBUG_USART.Instance->DR = '\r';
-			while (__HAL_UART_GET_FLAG(&(DEBUG_USART), UART_FLAG_TXE) == RESET);
-        }
-		DEBUG_USART.Instance->DR = *(str++);
-	 	while (__HAL_UART_GET_FLAG(&(DEBUG_USART), UART_FLAG_TXE) == RESET);
-    }
-}
-
-char rt_hw_console_getchar(void)
-{
-    uint8_t ch = 0;
-
-    if (__HAL_UART_GET_FLAG(&(DEBUG_USART),UART_FLAG_RXNE)!=RESET)
-    {
-        HAL_UART_Receive(&(DEBUG_USART), &ch, 1, 1);
-		__HAL_UART_GET_FLAG(&(DEBUG_USART), UART_FLAG_RXNE);
-    }
-    else
-    {
-        if(__HAL_UART_GET_FLAG(&(DEBUG_USART),UART_FLAG_ORE)!=RESET)
-        {
-            __HAL_UART_CLEAR_FLAG(&(DEBUG_USART), UART_FLAG_ORE);
-        }
-        rt_thread_mdelay(100);
-    }
-    return ch;
-}

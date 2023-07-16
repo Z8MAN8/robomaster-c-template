@@ -12,10 +12,25 @@ menu "Onboard Peripheral Drivers"
 endmenu
 
 menu "On-chip Peripheral Drivers"
+    config BSP_USING_PIN
+        bool "Enable PIN"
+        default y
+
+    config BSP_USING_UART
+        bool "Enable UART"
+        default y
 
 endmenu
 
 menu "Board extended module Drivers"
+
+endmenu
+
+menu "Development Tools"
+
+    config BSP_USING_EASYFLASH
+        bool "Enable EasyFlash"
+        default n
 
 endmenu
 

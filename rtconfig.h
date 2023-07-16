@@ -222,7 +222,12 @@
 
 /* On-chip Peripheral Drivers */
 
+#define BSP_USING_PIN
+#define BSP_USING_UART
+
 /* Board extended module Drivers */
+
+/* Development Tools */
 
 
 #endif

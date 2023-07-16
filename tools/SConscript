@@ -1,0 +1,20 @@
+import rtconfig
+from building import *
+
+# get current directory
+cwd = GetCurrentDir()
+
+# The set of source files associated with this SConscript file.
+src = []
+
+if GetDepend(['BSP_USING_EASYFLASH']):
+    src += ['easyflash/src/easyflash.c']
+    src += ['easyflash/src/ef_utils.c']
+    src += ['easyflash/port/ef_port.c']
+    src += ['easyflash/src/ef_env.c']
+
+path = [cwd + '/easyflash/inc']
+
+group = DefineGroup('Tools', src, depend = [''], CPPPATH = path)
+
+Return('group')

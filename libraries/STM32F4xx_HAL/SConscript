@@ -22,8 +22,6 @@ STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c
 STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c
 STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rng.c
 STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
-STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
-STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_usart.c
 STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c
 STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c
 STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c
@@ -38,9 +36,12 @@ STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_iwdg.c
 STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_wwdg.c
 ''')
 
-# if GetDepend(['RT_USING_SERIAL']):
-#     src += ['STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c']
-#     src += ['STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_usart.c']
+if GetDepend(['BSP_USING_PIN']):
+    src += ['STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c']
+
+if GetDepend(['BSP_USING_UART']):
+    src += ['STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c']
+    src += ['STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_usart.c']
 
 # if GetDepend(['RT_USING_I2C']):
 #     src += ['STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c']
@@ -110,10 +111,10 @@ STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_wwdg.c
 # if GetDepend(['BSP_USING_EXT_FMC_IO']):
 #     src += ['STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c']
 
-# if GetDepend(['BSP_USING_ON_CHIP_FLASH']):
-#     src += ['STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c']
-#     src += ['STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c']
-#     src += ['STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c']
+if GetDepend(['BSP_USING_EASYFLASH']):
+    src += ['STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c']
+    src += ['STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c']
+    src += ['STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c']
 
 # if GetDepend(['BSP_USING_LTDC']):
 #     src += ['STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_ltdc.c']
