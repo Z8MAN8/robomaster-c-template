@@ -176,12 +176,6 @@ rt_weak void rt_hw_board_init(void)
     SCB_EnableDCache();
 #endif
 
-    /* HAL_Init() function is called at the beginning of the program */
-    HAL_Init();
-
-    /* System clock initialization */
-    SystemClock_Config();
-
     /* Heap initialization */
 #if defined(RT_USING_HEAP)
     rt_system_heap_init((void *)HEAP_BEGIN, (void *)HEAP_END);
