@@ -20,6 +20,26 @@ menu "On-chip Peripheral Drivers"
         bool "Enable UART"
         default y
 
+    config BSP_USING_CAN
+        bool "Enable CAN"
+        default y
+
+    config BSP_USING_DWT
+        bool "Enable DWT"
+        default y
+
+endmenu
+
+menu "RoboMaster Modules"
+    menuconfig BSP_USING_MOTOR
+        bool "Select USING Motors"
+        default y
+        if BSP_USING_MOTOR
+            config BSP_USING_DJI_MOTOR
+                bool "Using DJI Motors"
+                default y
+        endif
+
 endmenu
 
 menu "Board extended module Drivers"

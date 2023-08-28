@@ -224,6 +224,13 @@
 
 #define BSP_USING_PIN
 #define BSP_USING_UART
+#define BSP_USING_CAN
+#define BSP_USING_DWT
+
+/* RoboMaster Modules */
+
+#define BSP_USING_MOTOR
+#define BSP_USING_DJI_MOTOR
 
 /* Board extended module Drivers */
 

@@ -10,7 +10,7 @@
       <TargetName>rt-thread</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060750::V5.06 update 6 (build 750)::.\ARMCC</pCCUsed>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>RT_USING_LIBC, RT_USING_ARMLIBC, USE_HAL_DRIVER, STM32F407xx, __CLK_TCK=RT_TICK_PER_SECOND, __STDC_LIMIT_MACROS, __RTTHREAD__</Define>
               <Undefine></Undefine>
-              <IncludePath>tools\easyflash\inc;libraries\HAL_Drivers\config;.;libraries\HAL_Drivers;rt-thread\components\finsh;rt-thread\libcpu\arm\common;libraries\STM32F4xx_HAL\CMSIS\Device\ST\STM32F4xx\Include;board;board\CubeMX_Config\Inc;rt-thread\libcpu\arm\cortex-m4;rt-thread\components\libc\posix\io\stdio;rt-thread\include;rt-thread\components\libc\compilers\common\extension\fcntl\octal;libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Inc;applications;rt-thread\components\libc\compilers\common\include;rt-thread\components\libc\posix\io\poll;rt-thread\components\libc\compilers\common\extension;libraries\HAL_Drivers\CMSIS\Include;rt-thread\components\libc\posix\ipc</IncludePath>
+              <IncludePath>libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Inc;libraries\STM32F4xx_HAL\CMSIS\Device\ST\STM32F4xx\Include;rt-thread\components\libc\compilers\common\include;tools\easyflash\inc;board;board\CubeMX_Config\Inc;rt-thread\libcpu\arm\cortex-m4;rt-thread\components\libc\posix\io\stdio;rt-thread\include;rt-thread\components\libc\compilers\common\extension\fcntl\octal;src\RM_Drivers;libraries\HAL_Drivers\config;.;src;rt-thread\components\finsh;rt-thread\libcpu\arm\common;rt-thread\components\libc\posix\io\poll;rt-thread\components\libc\compilers\common\extension;libraries\HAL_Drivers;libraries\HAL_Drivers\CMSIS\Include;rt-thread\components\libc\posix\ipc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -380,16 +380,6 @@
         </TargetArmAds>
       </TargetOption>
       <Groups>
-        <Group>
-          <GroupName>Applications</GroupName>
-          <Files>
-            <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>applications\main.c</FilePath>
-            </File>
-          </Files>
-        </Group>
         <Group>
           <GroupName>Compiler</GroupName>
           <Files>
@@ -468,6 +458,11 @@
         <Group>
           <GroupName>Drivers</GroupName>
           <Files>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>board\CubeMX_Config\Src\main.c</FilePath>
+            </File>
             <File>
               <FileName>stm32f4xx_hal_msp.c</FileName>
               <FileType>1</FileType>
@@ -589,11 +584,6 @@
               <FilePath>libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_lptim.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_hal_flash_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ex.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32f4xx_hal_qspi.c</FileName>
               <FileType>1</FileType>
               <FilePath>libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_qspi.c</FilePath>
@@ -704,11 +694,6 @@
               <FilePath>libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cryp.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_hal_flash_ramfunc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ramfunc.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32f4xx_hal.c</FileName>
               <FileType>1</FileType>
               <FilePath>libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c</FilePath>
@@ -729,11 +714,6 @@
               <FilePath>libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cec.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_hal_flash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash.c</FilePath>
-            </File>
-            <File>
               <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
               <FilePath>libraries\STM32F4xx_HAL\CMSIS\Device\ST\STM32F4xx\Source\Templates\system_stm32f4xx.c</FilePath>
@@ -742,31 +722,6 @@
               <FileName>stm32f4xx_hal_gpio.c</FileName>
               <FileType>1</FileType>
               <FilePath>libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Tools</GroupName>
-          <Files>
-            <File>
-              <FileName>ef_env.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>tools\easyflash\src\ef_env.c</FilePath>
-            </File>
-            <File>
-              <FileName>ef_port.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>tools\easyflash\port\ef_port.c</FilePath>
-            </File>
-            <File>
-              <FileName>ef_utils.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>tools\easyflash\src\ef_utils.c</FilePath>
-            </File>
-            <File>
-              <FileName>easyflash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>tools\easyflash\src\easyflash.c</FilePath>
             </File>
           </Files>
         </Group>
